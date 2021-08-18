@@ -54,12 +54,12 @@
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| postal_cord | integer    | null: false                    |
+| postal_cord | string     | null: false                    |
 | prefecture  | string     | null: false                    |
 | city        | string     | null: false                    |
 | block       | string     | null: false                    |
 | building    | string     |                                |
-| phone       | integer    | null: false                    |
+| phone       | string     | null: false                    |
 | order       | references | null: false, foreign_key: true |
 
 ### Association
