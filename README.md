@@ -20,17 +20,17 @@
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| item_name       | string     | null: false                    |
-| explanation     | text       | null: false                    |
-| category        | string     | null: false                    |
-| status          | string     | null: false                    |
-| burden_method   | string     | null: false                    |
-| shipment_source | string     | null: false                    |
-| shipping_days   | string     | null: false                    |
-| price           | integer    | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item_name          | string     | null: false                    |
+| explanation        | text       | null: false                    |
+| category_id        | integer    | null: false                    |
+| status_id          | integer    | null: false                    |
+| burden_method_id   | integer    | null: false                    |
+| shipment_source_id | integer    | null: false                    |
+| shipping_days_id   | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -41,10 +41,6 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| card_number  | integer    | null: false                    |
-| expiry_month | integer    | null: false                    |
-| expiry_year  | integer    | null: false                    |
-| card_vc      | integer    | null: false                    |
 | user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
 
