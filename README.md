@@ -52,15 +52,15 @@
 
 ## shippings テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| postal_cord | string     | null: false                    |
-| prefecture  | string     | null: false                    |
-| city        | string     | null: false                    |
-| block       | string     | null: false                    |
-| building    | string     |                                |
-| phone       | string     | null: false                    |
-| order       | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_cord   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone         | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
