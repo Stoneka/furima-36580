@@ -18,7 +18,10 @@ class ItemsController < ApplicationController
 
   private
 
-#  def items_params
-#  end ストロングパラメーター記述
+  def items_params
+    params.require(:item).permit(
+      :image, :item_name, :explanation, :category_id, :status_id,
+      :burden_method_id, :shipment_source_id, :shipping_days_id, :price).merge(user_id: current_user.id)
+  end 
 
 end
