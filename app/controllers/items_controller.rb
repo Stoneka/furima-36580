@@ -15,4 +15,10 @@ class ItemsController < ApplicationController
        render :new
     end
   end
+
+  private
+
+#  def items_params
+#  end ストロングパラメーター記述
+
 end
