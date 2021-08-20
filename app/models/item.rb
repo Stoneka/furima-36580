@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :shipment_source
   belongs_to :shipping_days
 
-  validates :image, presence: true
+  validates :image, presence: true, if: :was_attached?
   validates :item_name, presence: true
   validates :explanation, presence: true
   with_options presence: true, numericality: { other_than: 1 , message: "can't be blank" } do
@@ -19,4 +19,8 @@ class Item < ApplicationRecord
     validates :shipping_days_id
   end
   validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  
+  def was_attached?
+    self.image.attached?
+  end
 end
