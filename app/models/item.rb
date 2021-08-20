@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :shipment_source
   belongs_to :shipping_days
 
+  validates :image, presence: true
   validates :item_name, presence: true
   validates :explanation, presence: true
   with_options presence: true, numericality: { other_than: 1 , message: "can't be blank" } do
