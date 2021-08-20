@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
     if item.update(items_params)
       redirect_to item_path
     else
-      @item = item.find(params[:id])
+      @item = item
       render :edit
     end
   end
