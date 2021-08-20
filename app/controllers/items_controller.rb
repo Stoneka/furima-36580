@@ -18,6 +18,11 @@ class ItemsController < ApplicationController
     end
     def show
       @item = Item.find(params[:id])
+      @category = Category.all
+      @status = Status.all
+      @burden_method = BurdenMethod.all
+      @shipment_source = ShipmentSource.all
+      @shipping_days = ShippingDays.all
     end
   end
 
