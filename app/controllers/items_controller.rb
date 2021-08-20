@@ -11,9 +11,6 @@ class ItemsController < ApplicationController
     @item = Item.new(items_params)
     if @item.save
       redirect_to root_path
-    else
-      @items = Item.includes(:user)
-      render :new
     end
   end
 
