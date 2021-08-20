@@ -19,7 +19,7 @@
        <%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= (@burden_method.find_by_id @item.burden_method_id).name %>
+        <%= @item.burden_method_name %>
       </span>
     </div>
 
@@ -45,23 +45,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= (@category.find_by_id @item.category_id).name %></td>
+          <td class="detail-value"><%= @item.category_name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= (@status.find_by_id @item.status_id).name %></td>
+          <td class="detail-value"><%= @item.status_name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= (@burden_method.find_by_id @item.burden_method_id).name %></td>
+          <td class="detail-value"><%= @item.burden_method_name%></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= (@shipment_source.find_by_id @item.shipment_source_id).name %></td>
+          <td class="detail-value"><%= @item.shipment_source_name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= (@shipping_days.find_by_id @item.shipping_days_id).name %></td>
+          <td class="detail-value"><%= @item.shipping_days_name %></td>
         </tr>
       </tbody>
     </table>
@@ -100,7 +100,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= (@category.find_by_id @item.category_id).name%>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category_name%>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>

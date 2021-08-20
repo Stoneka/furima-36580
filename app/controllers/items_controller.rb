@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
     @items = Item.includes(:user).order('created_at DESC')
-    @burden_method = BurdenMethod.all
   end
 
   def new
@@ -20,11 +19,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @category = Category.all
-    @status = Status.all
-    @burden_method = BurdenMethod.all
-    @shipment_source = ShipmentSource.all
-    @shipping_days = ShippingDays.all
   end
 
   private
