@@ -3,9 +3,9 @@
   priceInput.addEventListener("input", () => {
   const inputValue = priceInput.value;
   const commission = document.getElementById("add-tax-price");
-    commission.innerHTML = inputValue/10
+    commission.innerHTML = Math.floor(inputValue/10)
   const profitAmount = document.getElementById("profit");
-    profitAmount.innerHTML = inputValue*9/10
+    profitAmount.innerHTML = Math.floor(inputValue*9/10)
   })
   
 };
