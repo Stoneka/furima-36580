@@ -51,117 +51,73 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
-  end
-end
-=begin
+
     context '商品の出品ができないとき' do
+      it 'imageが空では登録できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
       it 'item_nameが空では登録できない' do
         @item.item_name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("item_name can't be blank")
+        expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
-      it 'emailが空では登録できない' do
-        @item.email = ''
+      it 'explanationが空では登録できない' do
+        @item.explanation = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Email can't be blank")
+        expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
-      it 'emailに@を含まなければ登録できない' do
-        @item.email = 'testtest'
+      it 'category_idが初期値では登録できない' do
+        @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Email is invalid')
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-      it 'passwordが空では登録できない' do
-        @item.password = ''
+      it 'status_idが初期値では登録できない' do
+        @item.status_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Password can't be blank")
+        expect(@item.errors.full_messages).to include("Status can't be blank")
       end
-      it 'passwordが存在してもpassword_confirmationが空では登録できない' do
-        @item.password_confirmation = ''
+      it 'burden_method_idが初期値では登録できない' do
+        @item.burden_method_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@item.errors.full_messages).to include("Burden method can't be blank")
       end
-      it 'passwordが5文字以下では登録できない' do
-        @item.password = '0000a'
-        @item.password_confirmation = '0000a'
+      it 'shipment_source_idが初期値では登録できない' do
+        @item.shipment_source_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+        expect(@item.errors.full_messages).to include("Shipment source can't be blank")
       end
-      it 'passwordは英字のみでは登録できない' do
-        @item.password = 'abcdef'
-        @item.password_confirmation = 'abcdef'
+      it 'shipping_days_idが初期値では登録できない' do
+        @item.shipping_days_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
+        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
       end
-      it 'passwordは数字のみでは登録できない' do
-        @item.password = '123456'
-        @item.password_confirmation = '123456'
+      it 'priceが空では登録できない' do
+        @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
-      it 'お名前(全角)は、名字が空では登録できない' do
-        @item.last_name = ''
+      it 'priceが300未満の値では登録できない' do
+        @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Last name can't be blank")
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
-      it 'お名前(全角)は、名前が空では登録できない' do
-        @item.first_name = ''
+      it 'priceが9,999,999を超える値では登録できない' do
+        @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("First name can't be blank")
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
-      it 'お名前(全角)は、名字が全角（漢字・ひらがな・カタカナ）でなければ登録できない' do
-        @item.last_name = 'ABC'
+      it 'priceが半角数字以外では登録できない' do
+        @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Last name 全角文字を使用してください')
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
-      it 'お名前(全角)は、名前が全角（漢字・ひらがな・カタカナ）でなければ登録できない' do
-        @item.first_name = 'ABC'
+      it 'userが紐づいていなければ登録できない' do
+        @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include('First name 全角文字を使用してください')
-      end
-      it 'お名前カナ(全角)は、名字が空では登録できない' do
-        @item.status_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Last name kana can't be blank")
-      end
-      it 'お名前カナ(全角)は、名前が空では登録できない' do
-        @item.burden_method_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("First name kana can't be blank")
-      end
-      it 'お名前カナ(全角)は、名字がカタカナでなければ登録できない' do
-        @item.status_id = '手酢'
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Last name kana 全角カナ文字を使用してください')
-      end
-      it 'お名前カナ(全角)は、名前がカタカナでなければ登録できない' do
-        @item.burden_method_id = '都'
-        @item.valid?
-        expect(@item.errors.full_messages).to include('First name kana 全角カナ文字を使用してください')
-      end
-      it 'shipment_source_idが空では登録できない' do
-        @item.shipment_source_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("shipment_source_id can't be blank")
-      end
-      it '重複したemailが存在する場合登録できない' do
-        @item.save
-        another_item = FactoryBot.build(:item)
-        another_item.email = @item.email
-        another_item.valid?
-        expect(another_item.errors.full_messages).to include('Email has already been taken')
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
-
-  item_name 
-  explanation        
-  category_id        
-  status_id         
-  burden_method_id  
-  shipment_source_id 
-  shipping_days_id  
-  price              
-
-  item_name,explanation,category_id,status_id,burden_method_id,shipment_source_id,shipping_days_id,price
-bundle exec rspec spec/models/item_spec.rb
-=end
+end
