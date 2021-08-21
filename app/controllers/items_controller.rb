@@ -23,11 +23,12 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    redirect_to root_path if current_user.id != @item.user_id
+    move_to_index(@item)
   end
 
   def update
     item = Item.find(params[:id])
+    move_to_index(item)
     if item.update(items_params)
       redirect_to item_path
     else
@@ -44,4 +45,11 @@ class ItemsController < ApplicationController
       :burden_method_id, :shipment_source_id, :shipping_days_id, :price
     ).merge(user_id: current_user.id)
   end
+
+  def move_to_index(item)
+    if current_user.id != item.user_id
+      redirect_to root_path
+    end
+  end
+
 end
