@@ -4,7 +4,7 @@ RSpec.describe OrderShipping, type: :model do
   before do
     item = FactoryBot.create(:item)
     user = FactoryBot.create(:user)
-    @order_shipping = FactoryBot.build(:order_shipping, user_id: user_id, item_id: item.id)
+    @order_shipping = FactoryBot.build(:order_shipping, user_id: user.id, item_id: item.id)
     sleep 0.3
   end
 describe '商品購入機能' do
@@ -34,7 +34,7 @@ describe '商品購入機能' do
       expect(@order_shipping).to be_valid
     end
     it 'phoneは空でなければ登録できる' do
-      @order_shipping.phone = 12312341234
+      @order_shipping.phone = '12312341234'
       expect(@order_shipping).to be_valid
     end
     it "tokenが空でなければ登録できる" do
@@ -72,17 +72,22 @@ describe '商品購入機能' do
     it 'phoneが空では登録できない' do
       @order_shipping.phone = ''
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include("Phone is invalid")
+      expect(@order_shipping.errors.full_messages).to include("Phone can't be blank")
     end
     it 'phoneが半角数字以外では登録できない' do
       @order_shipping.phone = '１２３４５６７８９１０'
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include("Phone is invalid")
+      expect(@order_shipping.errors.full_messages).to include("Phone is not a number")
     end
     it 'phoneが10桁未満では登録できない' do
-      @order_shipping.phone = 123456789
+      @order_shipping.phone = '123456789'
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include("Phone is invalid")
+      expect(@order_shipping.errors.full_messages).to include("Phone is too short (minimum is 10 characters)")
+    end
+    it 'phoneが12桁以上では登録できない' do
+      @order_shipping.phone = '123456789012'
+      @order_shipping.valid?
+      expect(@order_shipping.errors.full_messages).to include("Phone is too long (maximum is 11 characters)")
     end
     it 'user_idが紐づいていなければ登録できない' do
       @order_shipping.user_id = nil

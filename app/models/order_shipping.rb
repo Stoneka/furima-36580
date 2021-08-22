@@ -10,7 +10,7 @@ class OrderShipping
     validates :shipment_source_id, numericality: {other_than: 1, message: "can't be blank"}
     validates :city
     validates :block
-    validates :phone, format: {with: /\d{10,11}/}
+    validates :phone, numericality: true, length: {minimum: 10, maximum: 11}#format: {with: /\d{10,11}/}
     validates :token
   end
 
