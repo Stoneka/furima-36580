@@ -4,7 +4,7 @@ RSpec.describe OrderShipping, type: :model do
   before do
     item = FactoryBot.create(:item)
     @order_shipping = FactoryBot.build(:order_shipping, user_id: item.user_id, item_id: item.id)
-    sleep 0.1
+    sleep 0.3
   end
 describe '商品購入機能' do
 
@@ -37,12 +37,9 @@ describe '商品購入機能' do
       expect(@order_shipping).to be_valid
     end
   end
-end
-end
 
-=begin
   context '商品の購入ができないとき' do
-    it 'postal_codeが空だと登録できない' do
+    it 'postal_codeが空では登録できない' do
       @order_shipping.postal_code = ''
       @order_shipping.valid?
       expect(@order_shipping.errors.full_messages).to include("Postal code can't be blank")
@@ -52,32 +49,46 @@ end
       @order_shipping.valid?
       expect(@order_shipping.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
     end
-    it 'prefectureを選択していないと登録できない' do
-      @order_shipping.prefecture = 0
+    it 'shipment_source_idが初期値では登録できない' do
+      @order_shipping.shipment_source_id = 1
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include("Prefecture can't be blank")
+      expect(@order_shipping.errors.full_messages).to include("Shipment source can't be blank")
     end
-    it 'priceが空だと登録できない' do
-      @order_shipping.price = nil
+    it 'cityが空では登録できない' do
+      @order_shipping.city = ''
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include("Price can't be blank")
+      expect(@order_shipping.errors.full_messages).to include("City can't be blank")
     end
-    it 'priceが全角数字だと登録できない' do
-      @order_shipping.price = '２０００'
+    it 'blockが空では登録できない' do
+      @order_shipping.block = ''
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include('Price is invalid')
+      expect(@order_shipping.errors.full_messages).to include("Block can't be blank")
     end
-    it 'priceが1円未満では登録できない' do
-      @order_shipping.price = 0
+    it 'phoneが空では登録できない' do
+      @order_shipping.phone = ''
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include('Price is invalid')
+      expect(@order_shipping.errors.full_messages).to include("Phone is invalid")
     end
-    it 'priceが1,000,000円を超過すると登録できない' do
-      @order_shipping.price = 1000001
+    it 'phoneが半角数字以外では登録できない' do
+      @order_shipping.phone = '１２３４５６７８９１０'
       @order_shipping.valid?
-      expect(@order_shipping.errors.full_messages).to include('Price is invalid')
+      expect(@order_shipping.errors.full_messages).to include("Phone is invalid")
+    end
+    it 'phoneが10桁未満では登録できない' do
+      @order_shipping.phone = 123456789
+      @order_shipping.valid?
+      expect(@order_shipping.errors.full_messages).to include("Phone is invalid")
+    end
+    it 'user_idが紐づいていなければ登録できない' do
+      @order_shipping.user_id = nil
+      @order_shipping.valid?
+      expect(@order_shipping.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが紐づいていなければ登録できない' do
+      @order_shipping.item_id = nil
+      @order_shipping.valid?
+      expect(@order_shipping.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
 end
-=end
