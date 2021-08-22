@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 def index
-  @order = Order.new
+  @order = Order.new.include(:item)
 end
 
 def create
