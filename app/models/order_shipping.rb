@@ -9,9 +9,10 @@ class OrderShipping
     validates :shipment_source_id, numericality: {other_than: 1, message: "can't be blank"}
     validates :city
     validates :block
-    validates :pohone, format: {with: /\d{10,11}/}
+    validates :phone, format: {with: /\d{10,11}/}
+    validates :building, allow_blank: true
   end
-  validates :building, allow_blank: true
+
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
