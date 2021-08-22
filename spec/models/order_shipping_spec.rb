@@ -36,6 +36,10 @@ describe '商品購入機能' do
       @order_shipping.phone = 12312341234
       expect(@order_shipping).to be_valid
     end
+    it "tokenが空でなければ登録できる" do
+      @order_shipping.token = "tok_abcdefghijk00000000000000000"
+      expect(@order_shipping).to be_valid
+    end
   end
 
   context '商品の購入ができないとき' do
@@ -88,6 +92,11 @@ describe '商品購入機能' do
       @order_shipping.item_id = nil
       @order_shipping.valid?
       expect(@order_shipping.errors.full_messages).to include("Item can't be blank")
+    end
+    it "tokenが空では登録できない" do
+      @order_shipping.token = nil
+      @order_shipping.valid?
+      expect(@order_shipping.errors.full_messages).to include("Token can't be blank")
     end
   end
 end

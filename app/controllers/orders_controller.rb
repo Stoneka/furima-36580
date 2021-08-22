@@ -3,9 +3,7 @@ before_action :authenticate_user!, only: [:index, :create]
 
 def index
   @item = Item.find(params[:item_id])
-  if @item.order.present? 
-    redirect_to root_path
-  elsif @item.user_id && current_user.id
+  if @item.order.present? || @item.user.id == current_user.id
     redirect_to root_path
   end
   @order_shipping = OrderShipping.new
