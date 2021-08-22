@@ -11,7 +11,6 @@ class OrderShipping
     validates :city
     validates :block
     validates :phone, format: {with: /\d{10,11}/}
-    validates :building, allow_blank: true
     validates :token
   end
 
