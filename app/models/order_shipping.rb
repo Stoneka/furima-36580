@@ -1,6 +1,7 @@
 class OrderShipping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :shipment_source_id, :city, :block, :building, :phone
+  attr_accessor :user_id, :item_id, :postal_code, :shipment_source_id,
+                :city, :block, :building, :phone, :token
 
   with_options presence: true do
     validates :user_id
@@ -11,6 +12,7 @@ class OrderShipping
     validates :block
     validates :phone, format: {with: /\d{10,11}/}
     validates :building, allow_blank: true
+    validates :token
   end
 
 
