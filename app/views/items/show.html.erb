@@ -19,7 +19,7 @@
        <%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= @item.burden_method_name %>
+        <%= @item.burden_method.name %>
       </span>
     </div>
     <% if @item.order.present? %>
@@ -43,23 +43,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.category_name %></td>
+          <td class="detail-value"><%= @item.category.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @item.status_name %></td>
+          <td class="detail-value"><%= @item.status.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.burden_method_name%></td>
+          <td class="detail-value"><%= @item.burden_method.name%></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @item.shipment_source_name %></td>
+          <td class="detail-value"><%= @item.shipment_source.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @item.shipping_days_name %></td>
+          <td class="detail-value"><%= @item.shipping_days.name %></td>
         </tr>
       </tbody>
     </table>
@@ -98,7 +98,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= @item.category_name%>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name%>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>

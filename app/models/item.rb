@@ -4,11 +4,11 @@ class Item < ApplicationRecord
   has_one :order
   
   has_one_attached :image
-  belongs_to :category, shortcuts: [:name]
-  belongs_to :status, shortcuts: [:name]
-  belongs_to :burden_method, shortcuts: [:name]
-  belongs_to :shipment_source, shortcuts: [:name]
-  belongs_to :shipping_days, shortcuts: [:name]
+  belongs_to :category
+  belongs_to :status
+  belongs_to :burden_method
+  belongs_to :shipment_source
+  belongs_to :shipping_days
 
   with_options presence: true do
     validates :image
