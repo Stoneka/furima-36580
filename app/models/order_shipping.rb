@@ -6,8 +6,8 @@ class OrderShipping
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
-    validates :shipment_source_id, numericality: {other_than: 1, message: "can't be blank"}
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "にはハイフンを含める必要があります"}
+    validates :shipment_source_id, numericality: {other_than: 1, message: "を入力してください"}
     validates :city
     validates :block
     validates :phone, numericality: true, length: {minimum: 10, maximum: 11}#format: {with: /\d{10,11}/}

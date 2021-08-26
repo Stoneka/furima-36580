@@ -10,6 +10,7 @@ def index
 end
 
 def create
+
   @order_shipping = OrderShipping.new(order_shipping_params)
   if @order_shipping.valid?
     pay_item

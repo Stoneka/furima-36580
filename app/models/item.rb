@@ -15,7 +15,7 @@ class Item < ApplicationRecord
     validates :item_name
     validates :explanation
   end
-  with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
+  with_options presence: true, numericality: { other_than: 1, message: "を入力してください" } do
     validates :category_id
     validates :status_id
     validates :burden_method_id
