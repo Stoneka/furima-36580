@@ -21,6 +21,7 @@ ja:
         shipment_source_id: 発送元の地域
         shipping_days_id: 発送までの日数
         price: 販売価格
+        user: ユーザー
   activemodel:
     attributes:
       order_shipping:
@@ -30,3 +31,5 @@ ja:
         block: 番地
         phone: 電話番号
         token: クレジットカード情報
+        user_id: ユーザー
+        item_id: 商品
