@@ -8,13 +8,14 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item_tag = ItemTag.new
   end
 
   def create
-    @item = Item.new(items_params)
-    if @item.save
-      redirect_to root_path
+    @item_tag = ItemTag.new(item_tag_params)
+    if @item_tag.valid?
+      @item_tag.save
+      return redirect_to root_path
     else
       render :new
     end
@@ -46,12 +47,23 @@ class ItemsController < ApplicationController
 
   private
 
+  def item_tag_params
+    params.require(:item_tag).permit(
+      {images:[]}, :item_name, :explanation, :category_id, :status_id,
+      :burden_method_id, :shipment_source_id, :shipping_days_id, :price,
+      :tag_name
+    ).merge(user_id: current_user.id)
+  end
+
+=begin
+Formオブジェクトパターン実装による記述の変更
   def items_params
     params.require(:item).permit(
       {images:[]}, :item_name, :explanation, :category_id, :status_id,
       :burden_method_id, :shipment_source_id, :shipping_days_id, :price
     ).merge(user_id: current_user.id)
   end
+=end
 
   def set_item
     @item = Item.find(params[:id])
