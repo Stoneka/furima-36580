@@ -13,6 +13,8 @@ class Item < ApplicationRecord
   belongs_to :shipment_source
   belongs_to :shipping_days
 
+=begin
+  タグ付け機能実装によるフォームオブジェクトパターン前
   with_options presence: true do
     validates :images
     validates :item_name
@@ -27,3 +29,4 @@ class Item < ApplicationRecord
   end
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
+=end
