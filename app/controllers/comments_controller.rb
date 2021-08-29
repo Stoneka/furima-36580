@@ -2,9 +2,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      ActionCable.server.broadcast 'comment_channel', text: @comment
+      @user = User.find(@comment.user_id)
+      ActionCable.server.broadcast 'comment_channel', comment: @comment, user_name: @user
+    else
+    redirect_to item_path(@comment.item.id)
     end
-    #redirect_to item_path(@comment.item.id)
   end
 
   private
