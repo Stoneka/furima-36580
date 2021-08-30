@@ -37,6 +37,16 @@
     <div class="item-explain-box">
       <span><%= @item.explanation %></span>
     </div>
+
+    <%# タグの表示 %>
+    <div class="item-explain-box">
+      <span><% @item.tags.each do |tag| %>
+            <%= tag.tag_name %>
+            <% end %>
+      </span>
+    </div>
+    <%# /タグの表示 %>
+
     <table class="detail-table">
       <tbody>
         <tr>
