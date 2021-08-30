@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-  if ( document.getElementById('item_image')){
+  if ( document.getElementById('item_tag_image')){
     const ImageList = document.getElementById('image-list');
 
     const createImageHTML = (blob) => {
@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function(){
       blobImage.width = 150; //画像をリサイズ
       blobImage.height = 100;
       const inputHTML = document.createElement('input')
-      inputHTML.setAttribute('id', `item_image_${imageElementNum}`)
-      inputHTML.setAttribute('name', 'item[images][]')
+      inputHTML.setAttribute('id', `item_tag_image_${imageElementNum}`)
+      inputHTML.setAttribute('name', 'item_tag[images][]')
       inputHTML.setAttribute('type', 'file')
       imageElement.appendChild(blobImage);
       imageElement.appendChild(inputHTML);
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
       })
     };
 
-    document.getElementById('item_image').addEventListener('change', function(e){
+    document.getElementById('item_tag_image').addEventListener('change', function(e){
      // const imageContent = document.querySelector('img');
      // if (imageContent){
      //   imageContent.remove();

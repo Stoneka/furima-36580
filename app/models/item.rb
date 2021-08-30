@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_days
 
 =begin
-  タグ付け機能実装によるフォームオブジェクトパターン前
+  タグ付け機能実装によるフォームオブジェクトパターン使用前
   with_options presence: true do
     validates :images
     validates :item_name
@@ -28,5 +28,5 @@ class Item < ApplicationRecord
     validates :shipping_days_id
   end
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-end
 =end
+end
