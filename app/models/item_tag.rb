@@ -25,7 +25,44 @@ class ItemTag
                          category_id: category_id, status_id: status_id, burden_method_id: burden_method_id,
                          shipment_source_id: shipment_source_id, shipping_days_id: shipping_days_id,
                          price: price, user_id: user_id)
-      tag = Tag.create(tag_name: tag_name)
+      tag = Tag.where(tag_name: tag_name).first_or_initialize
+      tag.save
       ItemTagRelation.create(item_id: item.id, tag_id: tag.id)
   end
+
 end
+
+#フォームオブジェクトをActiveRecordのモデルのような振る舞いができる記述（未完成）
+#  def initialize(attributes = nil, item: Item.new)
+#    @item = item
+#    attributes ||= default_attributes
+#    super(attributes)
+#  end
+#  def default_attributes
+#    {
+#      images: item.images, item_name: item.item_name, explanation: item.explanation,
+#                         category_id: item.category_id, status_id: item.status_id, burden_method_id: item.burden_method_id,
+#                         shipment_source_id: item.shipment_source_id, shipping_days_id: item.shipping_days_id,
+#                         price: item.price, user_id: user_id,
+#      tags: item.tags.pluck(:name).join(",")
+#    }
+#  end
+#  def save
+#    ActiveRecord::Base.transaction do
+#      tags = set_tag_list.map{ |tag_name| Tag.where(name: tag_name).first_or_create }
+#      item.update!(images: item.images, item_name: item.item_name, explanation: item.explanation,
+#        category_id: item.category_id, status_id: item.status_id, burden_method_id: item.burden_method_id,
+#        shipment_source_id: item.shipment_source_id, shipping_days_id: item.shipping_days_id,
+#        price: item.price, user_id: user_id, tags: tags)
+#    end
+#  rescue ActiveRecord::RecordInvalid
+#    false
+#  end
+#
+#  attr_accessor :item
+#
+#  delegate :persisted?, to: :item
+#
+#  def to_model
+#    item
+#  end

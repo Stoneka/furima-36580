@@ -57,13 +57,13 @@ class ItemsController < ApplicationController
 
 =begin
 Formオブジェクトパターン実装による記述の変更
+=end
   def items_params
     params.require(:item).permit(
       {images:[]}, :item_name, :explanation, :category_id, :status_id,
       :burden_method_id, :shipment_source_id, :shipping_days_id, :price
     ).merge(user_id: current_user.id)
   end
-=end
 
   def set_item
     @item = Item.find(params[:id])
@@ -74,5 +74,4 @@ Formオブジェクトパターン実装による記述の変更
       redirect_to root_path
     end
   end
-
 end
