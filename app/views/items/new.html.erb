@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item , local: true do |f| %>
+    <%= form_with model: @item_tag ,url: items_path, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -19,12 +19,12 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :images, name: 'item[images][]', id: 'item_image'  %>
+        <%= f.file_field :images, name: 'item_tag[images][]', id: 'item_tag_image'  %>
       </div>
       <div id="image-list"></div>
-      <% @item.images.each do |image| %>
-      <%= image_tag image, class: 'images' %>
-      <% end %>
+        <%# @item_tag.images.each do |image| %>
+      <%#  <%= image_tag image, class: 'images' %>
+      <%#<% end %>
     </div>
     <%# /商品画像 %>
     <%# 商品名と商品説明 %>
@@ -43,6 +43,13 @@
       </div>
     </div>
     <%# /商品名と商品説明 %>
+
+    <%# 商品のタグ名 %>
+    <div class="tag-field", id='tag-field'>
+      <%= f.label :tag_name, "タグ" %>
+      <%= f.text_field :tag_name, class:"input-tag" %>
+    </div>
+    <%# /商品のタグ名 %>
 
     <%# 商品の詳細 %>
     <div class="items-detail">
